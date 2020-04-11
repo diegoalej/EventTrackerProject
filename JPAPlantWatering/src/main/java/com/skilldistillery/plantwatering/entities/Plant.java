@@ -1,5 +1,6 @@
 package com.skilldistillery.plantwatering.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,54 @@ public class Plant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(name="common_name")
 	private String name;
+	private String temperature;
+	private String light;
+	private String watering;
+	private String soil;
+	private String propagation;
+	
+
+	public String getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
+	}
+
+	public String getLight() {
+		return light;
+	}
+
+	public void setLight(String light) {
+		this.light = light;
+	}
+
+	public String getWatering() {
+		return watering;
+	}
+
+	public void setWatering(String watering) {
+		this.watering = watering;
+	}
+
+	public String getSoil() {
+		return soil;
+	}
+
+	public void setSoil(String soil) {
+		this.soil = soil;
+	}
+
+	public String getPropagation() {
+		return propagation;
+	}
+
+	public void setPropagation(String propagation) {
+		this.propagation = propagation;
+	}
 
 	public int getId() {
 		return id;
