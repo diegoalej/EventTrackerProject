@@ -53,6 +53,18 @@ public class PlantServiceImp implements PlantService {
 			return null;
 		}
 	}
+
+	@Override
+	public boolean delete(int id) {
+		boolean answer = false;
+		Optional<Plant> plant = plantRepo.findById(id);
+		if (plant.isPresent()) {
+			 plantRepo.deleteById(id);
+			 answer = true;
+		}
+		
+		return answer;
+	}
 	
 	
 	

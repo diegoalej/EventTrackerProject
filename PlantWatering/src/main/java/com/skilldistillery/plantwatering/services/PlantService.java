@@ -10,5 +10,6 @@ public interface PlantService {
 	public Plant createPlant(Plant plant);
 	public Plant updatePlant(Plant plant);
 	Plant findPlantById(int id);
+	public boolean delete(int id);
 
 }
