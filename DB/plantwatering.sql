@@ -21,7 +21,7 @@ USE `plantwateringdb` ;
 DROP TABLE IF EXISTS `user` ;
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(100) NULL,
   `last_name` VARCHAR(100) NULL,
   `password` VARCHAR(50) NULL,
@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `plant` ;
 
 CREATE TABLE IF NOT EXISTS `plant` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `common_name` VARCHAR(1000) NULL,
   `temperature` VARCHAR(1000) NULL,
   `light` VARCHAR(1000) NULL,
@@ -55,7 +55,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `user_plant` ;
 
 CREATE TABLE IF NOT EXISTS `user_plant` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `plant_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   `name` VARCHAR(100) NULL,
@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `user_plant` (
   INDEX `fk_plant_has_user_user1_idx` (`user_id` ASC),
   INDEX `fk_plant_has_user_plant_idx` (`plant_id` ASC),
   PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   CONSTRAINT `fk_plant_has_user_plant`
     FOREIGN KEY (`plant_id`)
     REFERENCES `plant` (`id`)

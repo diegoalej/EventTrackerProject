@@ -47,4 +47,9 @@ class UserPlantTests {
 		assertEquals("zebra plant", userPlant.getPlant().getName());
 	}
 
+	@Test
+	void test_plant_dates() {
+		assertEquals(2015, userPlant.getLastWatering().getYear());
+	}
+	
 }
