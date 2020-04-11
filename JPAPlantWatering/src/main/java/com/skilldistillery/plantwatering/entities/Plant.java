@@ -1,10 +1,15 @@
 package com.skilldistillery.plantwatering.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Plant {
@@ -20,6 +25,19 @@ public class Plant {
 	private String soil;
 	private String propagation;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "plant")
+	private List<UserPlant> userPlants;
+	
+	
+
+	public List<UserPlant> getUserPlants() {
+		return userPlants;
+	}
+
+	public void setUserPlants(List<UserPlant> userPlants) {
+		this.userPlants = userPlants;
+	}
 
 	public String getTemperature() {
 		return temperature;

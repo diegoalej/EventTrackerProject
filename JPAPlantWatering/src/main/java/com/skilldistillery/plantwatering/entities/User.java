@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	@Id
@@ -21,6 +23,7 @@ public class User {
 	@Column(name="last_name")
 	private String lastName;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<UserPlant> userPlants;
 	
