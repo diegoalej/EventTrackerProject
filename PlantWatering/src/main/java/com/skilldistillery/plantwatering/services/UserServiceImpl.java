@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User createUser(User user) {
-		List<UserPlant> userPlants = userPlantRepo.findByPlantId(user.getId());
+		List<UserPlant> userPlants = userPlantRepo.findByUserId(user.getId());
 		if (userPlants != null) {
 			user.setUserPlants(userPlants);
 		}

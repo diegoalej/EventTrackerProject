@@ -9,6 +9,8 @@
     </provider>
 		<!-- Entities -->
 	<class>com.skilldistillery.plantwatering.entities.Plant</class>
+	<class>com.skilldistillery.plantwatering.entities.User</class>
+	<class>com.skilldistillery.plantwatering.entities.UserPlant</class>
 
 
 		<!-- end entities -->
