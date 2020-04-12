@@ -60,8 +60,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean delete(int id) {
 		boolean answer = false;
+		List<UserPlant> userPlants = userPlantRepo.findByUserId(id);
 		Optional<User> user = userRepo.findById(id);
 		if (user.isPresent()) {
+			if (userPlants.size() > 0) {
+				userPlantRepo.deleteInBatch(userPlants);
+			}
 			 userRepo.deleteById(id);
 			 answer = true;
 		}

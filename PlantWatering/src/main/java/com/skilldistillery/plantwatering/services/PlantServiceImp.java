@@ -57,8 +57,12 @@ public class PlantServiceImp implements PlantService {
 	@Override
 	public boolean delete(int id) {
 		boolean answer = false;
+		List<UserPlant> userPlants = userPlantRepo.findByPlantId(id);
 		Optional<Plant> plant = plantRepo.findById(id);
 		if (plant.isPresent()) {
+			if (userPlants.size() > 0) {
+				userPlantRepo.deleteInBatch(userPlants);
+			}
 			 plantRepo.deleteById(id);
 			 answer = true;
 		}
