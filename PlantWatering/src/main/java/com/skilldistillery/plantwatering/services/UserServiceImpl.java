@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.plantwatering.entities.Plant;
 import com.skilldistillery.plantwatering.entities.User;
 import com.skilldistillery.plantwatering.entities.UserPlant;
 import com.skilldistillery.plantwatering.repositories.UserPlantRepository;
@@ -37,7 +38,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(User user) {
 		if (userRepo.findById(user.getId()) != null) {
-			return userRepo.saveAndFlush(user);
+			User answer =  userRepo.saveAndFlush(user);
+			return answer;
 		}
 		else {
 			return null;
@@ -55,4 +57,15 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Override
+	public boolean delete(int id) {
+		boolean answer = false;
+		Optional<User> user = userRepo.findById(id);
+		if (user.isPresent()) {
+			 userRepo.deleteById(id);
+			 answer = true;
+		}
+		
+		return answer;
+	}	
 }

@@ -13,6 +13,8 @@ public interface UserService {
 	User updateUser(User user);
 
 	User findUserById(int id);
+
+	boolean delete(int id);
 	
 	
 
