@@ -1,0 +1,13 @@
+package com.skilldistillery.wateringapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class WateringAppApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(WateringAppApplication.class, args);
+	}
+
+}

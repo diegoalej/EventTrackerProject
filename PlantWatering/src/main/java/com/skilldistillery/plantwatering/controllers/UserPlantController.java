@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.plantwatering.entities.Plant;
 import com.skilldistillery.plantwatering.entities.UserPlant;
 import com.skilldistillery.plantwatering.services.UserPlantService;
 
