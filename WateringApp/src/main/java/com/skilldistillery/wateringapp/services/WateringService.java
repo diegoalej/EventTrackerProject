@@ -12,4 +12,10 @@ public interface WateringService {
 
 	List<Watering> findWateringByUserName(String userName);
 
+	Watering createWatering(Watering watering);
+
+	boolean deleteWatering(int id);
+
+	Watering updateWatering(Watering watering);
+
 }

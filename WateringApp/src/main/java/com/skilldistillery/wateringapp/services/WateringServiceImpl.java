@@ -41,4 +41,35 @@ public class WateringServiceImpl implements WateringService {
 			return null;
 		}
 	}
+	
+	@Override
+	public Watering createWatering(Watering watering) {
+		if (waterRepo.findById(watering.getId()) != null) {
+			watering.setId(0);
+		}
+		return waterRepo.saveAndFlush(watering);
+	}
+	
+	@Override
+	public Watering updateWatering(Watering watering) {
+		if (waterRepo.findById(watering.getId()) != null) {
+			return waterRepo.saveAndFlush(watering);
+		}
+		else {
+			return null;			
+		}
+	}
+	
+	@Override
+	public boolean deleteWatering(int id) {
+		boolean answer = false;
+		Optional<Watering> watering = waterRepo.findById(id);
+		if (watering.isPresent()) {
+			waterRepo.deleteById(id);
+			answer = true;
+		}
+		
+		return answer;
+	}
+	
 }
