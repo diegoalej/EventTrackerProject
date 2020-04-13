@@ -9,7 +9,8 @@ The wateringapp was made for individuals to keep track of plant waterings in the
 This repository also contains a 'stretch goal' project called 'plantwatering' with a more complex app than described below, it contains different entities of plant, userPlant, and user. Endpoints are identical to the ones described below, only entity names change for more complex app.
 
 #### Table of REST endpoints
-
+Return type | Route| Functionality
+------------|-----------|----------
 List<Watering>	|GET api/waterings	       |Gets all waterings
 Watering        |GET api/waterings/{id}	   |Gets one watering by id
 List<Watering>  |GET api/waterings/{id}	   |Gets waterings by username
