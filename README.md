@@ -31,6 +31,6 @@ Users are able to create new events or edit current ones to keep track of their 
 
 ### Lessons Learned
 
-Schema building and editing with MySQL Workbench
-JPA and REST endpoints
-Repositories, Services, and Controllers communications
+* Schema building and editing with MySQL Workbench
+* JPA and REST endpoints
+* Repositories, Services, and Controllers communications
