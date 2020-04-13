@@ -10,12 +10,12 @@ This repository also contains a 'stretch goal' project called 'plantwatering' wi
 
 #### Table of REST endpoints
 
-List<Watering>	GET api/waterings	        Gets all waterings
-Watering        GET api/waterings/{id}	  Gets one watering by id
-List<Watering>  GET api/waterings/{id}	  Gets waterings by username
-Watering        POST api/waterings     	  Creates a new watering
-Watering        POST api/waterings/update	Replaces an watering post
-Boolean	        DELETE api/waterings/{id}	Deletes an watering post by id
+List<Watering>	|GET api/waterings	       |Gets all waterings
+Watering        |GET api/waterings/{id}	   |Gets one watering by id
+List<Watering>  |GET api/waterings/{id}	   |Gets waterings by username
+Watering        |POST api/waterings     	 |Creates a new watering
+Watering        |POST api/waterings/update |Replaces an watering post
+Boolean	        |DELETE api/waterings/{id} |Deletes an watering post by id
 
 ### How to use
 
@@ -23,11 +23,11 @@ Users are able to create new events or edit current ones to keep track of their 
 
 ### Technologies Used
 
-MySql
-Spring Boot
-Gradle
-Java
-Postman
+* MySql
+* Spring Boot
+* Gradle
+* Java
+* Postman
 
 ### Lessons Learned
 
