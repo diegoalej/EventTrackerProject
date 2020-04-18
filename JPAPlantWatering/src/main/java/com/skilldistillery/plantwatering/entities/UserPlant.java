@@ -1,6 +1,7 @@
 package com.skilldistillery.plantwatering.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +35,17 @@ public class UserPlant {
 	private LocalDate nextWatering;
 	private String location;
 	private boolean active;
+	
+	@OneToMany(mappedBy = "userPlant")
+	private List<Watering> waterings;
+
+	public List<Watering> getWaterings() {
+		return waterings;
+	}
+
+	public void setWaterings(List<Watering> waterings) {
+		this.waterings = waterings;
+	}
 
 	public int getId() {
 		return id;

@@ -79,6 +79,27 @@ CREATE TABLE IF NOT EXISTS `user_plant` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `watering`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `watering` ;
+
+CREATE TABLE IF NOT EXISTS `watering` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `watering_date` DATE NOT NULL,
+  `watering_comment` VARCHAR(1000) NULL,
+  `user_plant_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_watering_user_plant1_idx` (`user_plant_id` ASC),
+  CONSTRAINT `fk_watering_user_plant1`
+    FOREIGN KEY (`user_plant_id`)
+    REFERENCES `user_plant` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS plantwatering@localhost;
 SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
@@ -116,6 +137,17 @@ COMMIT;
 START TRANSACTION;
 USE `plantwateringdb`;
 INSERT INTO `user_plant` (`id`, `plant_id`, `user_id`, `name`, `last_watering`, `next_watering`, `location`, `active`) VALUES (1, 1, 1, 'zebra pant', '2015-12-17', '2015-12-17', 'living room', true);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `watering`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `plantwateringdb`;
+INSERT INTO `watering` (`id`, `watering_date`, `watering_comment`, `user_plant_id`) VALUES (1, '2015-12-17', '2015-12-17', 1);
+INSERT INTO `watering` (`id`, `watering_date`, `watering_comment`, `user_plant_id`) VALUES (2, '2015-12-17', '2015-12-17', 1);
 
 COMMIT;
 

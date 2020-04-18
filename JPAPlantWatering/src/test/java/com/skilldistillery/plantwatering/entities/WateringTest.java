@@ -12,12 +12,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTests {
+class WateringTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
-	
+	private Watering watering;
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("plantwatering");
@@ -31,21 +31,20 @@ class UserTests {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		watering = em.find(Watering.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		watering = null;
 	}
 
 	@Test
-	void test_plant_mapping() {
-		assertNotNull(user);
-		assertEquals("Diego", user.getFirstName());
-		assertEquals("zebra plant", user.getUserPlants().get(0).getPlant().getName());
-		assertEquals("looks great", user.getUserPlants().get(0).getWaterings().get(0).getWateringComment());
+	void test() {
+		assertNotNull(watering);
+		assertEquals("looks great", watering.getWateringComment());
+		assertEquals(1, watering.getUserPlant().getId());
 	}
 
 }
