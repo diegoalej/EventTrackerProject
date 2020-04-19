@@ -27,8 +27,15 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<UserPlant> userPlants;
 	
+	@Column(name="user_name")
+	private String userName;
 	
-	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public List<UserPlant> getUserPlants() {
 		return userPlants;
 	}
@@ -74,13 +81,14 @@ public class User {
 				.append(lastName).append(", password=").append(password).append(", active=").append(active).append("]");
 		return builder.toString();
 	}
-	public User(int id, String firstName, String lastName, String password, boolean active) {
+	public User(int id, String firstName, String lastName, String password, boolean active, String userName) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.password = password;
 		this.active = active;
+		this.userName = userName;
 	}
 	public User() {
 		super();

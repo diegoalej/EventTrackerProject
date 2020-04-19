@@ -7,10 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Watering {
@@ -25,10 +22,17 @@ public class Watering {
 	@Column(name="watering_comment")
 	private String wateringComment;
 	
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "user_plant_id")
-	private UserPlant userPlant;
+	@Column(name="user_plant_id")
+	private int userPlantId;
+	
+
+	public int getUserPlantId() {
+		return userPlantId;
+	}
+
+	public void setUserPlantId(int userPlantId) {
+		this.userPlantId = userPlantId;
+	}
 
 	public int getId() {
 		return id;
@@ -54,29 +58,22 @@ public class Watering {
 		this.wateringComment = wateringComment;
 	}
 
-	public UserPlant getUserPlant() {
-		return userPlant;
-	}
-
-	public void setUserPlant(UserPlant userPlant) {
-		this.userPlant = userPlant;
-	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Watering [id=").append(id).append(", wateringDate=").append(wateringDate)
-				.append(", wateringComment=").append(wateringComment).append(", userPlant=").append(userPlant)
+				.append(", wateringComment=").append(wateringComment).append(", userPlant=")
 				.append("]");
 		return builder.toString();
 	}
 
-	public Watering(int id, LocalDate wateringDate, String wateringComment, UserPlant userPlant) {
+	public Watering(int id, LocalDate wateringDate, String wateringComment, int userPlantId) {
 		super();
 		this.id = id;
 		this.wateringDate = wateringDate;
 		this.wateringComment = wateringComment;
-		this.userPlant = userPlant;
+		this.userPlantId = userPlantId;
 	}
 
 	public Watering() {

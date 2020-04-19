@@ -16,7 +16,7 @@ function getUserPlants(){
 	// * Use XMLHttpRequest to perform a GET request to "api/films/"
 	// with the filmId appended.
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', 'api/userplants/' + id);
+	xhr.open('GET', 'api/userplants/1');
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			switch (xhr.status) {
@@ -41,7 +41,7 @@ function getUserPlants(){
 
 }
 
-function displayUserPlant(userPlant) {
+function displayUserPlants(userPlant) {
 	let dataDiv = document.getElementById('eventDiv');
 	dataDiv.textContent = '';
 	// TODO:

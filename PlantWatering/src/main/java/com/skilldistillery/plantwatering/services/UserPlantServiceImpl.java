@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.plantwatering.entities.UserPlant;
+import com.skilldistillery.plantwatering.entities.Watering;
 import com.skilldistillery.plantwatering.repositories.PlantRepository;
 import com.skilldistillery.plantwatering.repositories.UserPlantRepository;
 import com.skilldistillery.plantwatering.repositories.UserRepository;
+import com.skilldistillery.plantwatering.repositories.WateringRepository;
 
 @Service
 public class UserPlantServiceImpl implements UserPlantService {
@@ -20,6 +22,9 @@ public class UserPlantServiceImpl implements UserPlantService {
 	PlantRepository plantRepo;
 	@Autowired
 	UserRepository userRepo;
+	
+	@Autowired
+	WateringRepository wateringRepo;
 	
 	@Override
 	public List<UserPlant> findAllUserPlants() {
@@ -85,10 +90,13 @@ public class UserPlantServiceImpl implements UserPlantService {
 		boolean answer = false;
 		Optional<UserPlant> userPlant = userPlantRepo.findById(id);
 		if (userPlant.isPresent()) {
+			wateringRepo.deleteAll(userPlant.get().getWaterings());
 			 userPlantRepo.deleteById(id);
 			 answer = true;
 		}
 		
 		return answer;
-	}	
+	}
+	
+
 }

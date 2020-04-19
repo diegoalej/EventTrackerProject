@@ -44,7 +44,7 @@ class WateringTest {
 	void test() {
 		assertNotNull(watering);
 		assertEquals("looks great", watering.getWateringComment());
-		assertEquals(1, watering.getUserPlant().getId());
+		assertEquals(1, watering.getId());
 	}
 
 }

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.plantwatering.entities.UserPlant;
+import com.skilldistillery.plantwatering.entities.Watering;
 import com.skilldistillery.plantwatering.services.UserPlantService;
+import com.skilldistillery.plantwatering.services.WateringService;
 
 @RestController
 @RequestMapping("api")
@@ -20,6 +22,9 @@ public class UserPlantController {
 	
 	@Autowired
 	UserPlantService userPlantServ;
+	
+	@Autowired
+	WateringService wateringServ;
 	
 	@GetMapping("userplants")
 	public List<UserPlant> showAllUserPlants() {
@@ -55,5 +60,6 @@ public class UserPlantController {
 	public boolean deleteExistingUserPlant(@PathVariable int id) {
 		return userPlantServ.delete(id);
 	}
+	
 
 }

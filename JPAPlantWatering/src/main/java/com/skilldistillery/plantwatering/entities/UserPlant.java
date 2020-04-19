@@ -36,7 +36,8 @@ public class UserPlant {
 	private String location;
 	private boolean active;
 	
-	@OneToMany(mappedBy = "userPlant")
+	
+	@OneToMany(mappedBy = "userPlantId")
 	private List<Watering> waterings;
 
 	public List<Watering> getWaterings() {

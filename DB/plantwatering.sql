@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `last_name` VARCHAR(100) NULL,
   `password` VARCHAR(50) NULL,
   `active` TINYINT NULL,
+  `username` VARCHAR(100) NULL,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -116,7 +117,7 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `plantwateringdb`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `password`, `active`) VALUES (1, 'Diego', 'Hoyos', 'plant', true);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `password`, `active`, `username`) VALUES (1, 'Diego', 'Hoyos', 'plant', true, 'diegoalej');
 
 COMMIT;
 
@@ -146,8 +147,8 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `plantwateringdb`;
-INSERT INTO `watering` (`id`, `watering_date`, `watering_comment`, `user_plant_id`) VALUES (1, '2015-12-17', '2015-12-17', 1);
-INSERT INTO `watering` (`id`, `watering_date`, `watering_comment`, `user_plant_id`) VALUES (2, '2015-12-17', '2015-12-17', 1);
+INSERT INTO `watering` (`id`, `watering_date`, `watering_comment`, `user_plant_id`) VALUES (1, '2015-12-17', 'looks great', 1);
+INSERT INTO `watering` (`id`, `watering_date`, `watering_comment`, `user_plant_id`) VALUES (2, '2015-12-17', 'looking wilted', 1);
 
 COMMIT;
 

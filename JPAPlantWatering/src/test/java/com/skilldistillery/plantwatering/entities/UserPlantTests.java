@@ -45,6 +45,7 @@ class UserPlantTests {
 		assertNotNull(userPlant);
 		assertEquals("Diego", userPlant.getUser().getFirstName());
 		assertEquals("zebra plant", userPlant.getPlant().getName());
+		assertEquals("looks great", userPlant.getWaterings().get(0).getWateringComment());
 	}
 
 	@Test

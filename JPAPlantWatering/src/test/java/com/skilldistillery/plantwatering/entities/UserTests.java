@@ -46,6 +46,7 @@ class UserTests {
 		assertEquals("Diego", user.getFirstName());
 		assertEquals("zebra plant", user.getUserPlants().get(0).getPlant().getName());
 		assertEquals("looks great", user.getUserPlants().get(0).getWaterings().get(0).getWateringComment());
+		assertEquals("diegoalej", user.getUserName());
 	}
 
 }
