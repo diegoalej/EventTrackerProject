@@ -1,36 +1,29 @@
 window.addEventListener('load', evt => {
 	console.log('Window loaded');
-	getUserPlants();
 	init();
 
 });
 
 function init(){
+	getUser();
 	
 }
 
-
-
-function getUser(){
-	// TODO:
-	// * Use XMLHttpRequest to perform a GET request to "api/films/"
-	// with the filmId appended.
+//Function gets all UserPlants for a User
+function getUserPlantsForUser(userId){
 	let xhr = new XMLHttpRequest();
-	xhr.open('GET', 'api/users/1');
+	xhr.open('GET', 'api/userplants/users/' + userId);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			switch (xhr.status) {
-			// * On success, if a response was received parse the film data
-			// and pass the film object to displayFilm().
+			// * On success, if a response was received parse the user data
+			// and pass the user object to displayUser().
 			case 200:
 				let dataJSON = xhr.responseText;
 				// console.log(dataJSON);
 				let data = JSON.parse(dataJSON);
 				displayUserPlants(data);
 				break;
-			// * On failure, or if no response text was received, put "Film
-			// not found"
-			// in the filmData div.
 			case 404:
 				displayNotFound();
 				break;
@@ -38,30 +31,60 @@ function getUser(){
 		}
 	}
 	xhr.send();
-
 }
 
+//Function displays the user's information in homepage
+function displayUserPlants(userPlants) {
+	let dataDiv = document.getElementById('eventDiv');
+	// dataDiv.textContent = '';
+	let ul = document.createElement('ul');
+	dataDiv.appendChild(ul);
+	userPlants.forEach(element => {
+		let li = document.createElement('li');
+		li.textContent = element.name;
+		ul.appendChild(li);
+	});
+	dataDiv.appendChild(ul);
+}
+
+//Function gets user and their plants... TODO to pass in id
+function getUser(){
+	let xhr = new XMLHttpRequest();
+	xhr.open('GET', 'api/users/1');
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+			switch (xhr.status) {
+			// * On success, if a response was received parse the user data
+			// and pass the user object to displayUser().
+			case 200:
+				let dataJSON = xhr.responseText;
+				// console.log(dataJSON);
+				let data = JSON.parse(dataJSON);
+				displayUser(data);
+				getUserPlantsForUser(1);
+				break;
+			case 404:
+				displayNotFound();
+				break;
+			}
+		}
+	}
+	xhr.send();
+}
+
+//Function displays the user's information in homepage
 function displayUser(user) {
 	let dataDiv = document.getElementById('eventDiv');
 	dataDiv.textContent = '';
-	// TODO:
-	// * Create and append elements to the data div to display:
-	// * Film title (h1) and description (blockquote).
 	console.log(user);
 	
 	let h1 = document.createElement('h1');
 	h1.textContent = 'Welcome ' + user.userName;
 	dataDiv.appendChild(h1);
-	let ul = document.createElement('ul');
-	dataDiv.appendChild(ul);
-	// var userPlants = user.
-	// let li = document.createElement('li');
-	// li.textContent = 'Rated ' + film.rating;
-	// ul.appendChild(li);
-	// li = document.createElement('li');
-	// li.textContent = 'Released: ' + film.releaseYear;
-	// ul.appendChild(li);
-	// li = document.createElement('li');
-	// li.textContent = film.length + ' minutes';
-	// ul.appendChild(li);
+}
+
+//Default method to display when users or items are not found
+function displayNotFound() {
+	let dataDiv = document.getElementById('eventDiv');
+	dataDiv.textContent = 'Items not found.';
 }

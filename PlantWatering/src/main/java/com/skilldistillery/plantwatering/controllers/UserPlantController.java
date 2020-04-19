@@ -2,6 +2,8 @@ package com.skilldistillery.plantwatering.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.plantwatering.entities.UserPlant;
-import com.skilldistillery.plantwatering.entities.Watering;
 import com.skilldistillery.plantwatering.services.UserPlantService;
 import com.skilldistillery.plantwatering.services.WateringService;
 
@@ -37,8 +38,15 @@ public class UserPlantController {
 	}
 	
 	@GetMapping("userplants/users/{id}")
-	public List<UserPlant> findUserPlantWithUserId(@PathVariable Integer id) {
-		return userPlantServ.findUserPlantByUserId(id);
+	public List<UserPlant> findUserPlantWithUserId(@PathVariable Integer id, HttpServletResponse response) {
+		List<UserPlant> userPlants= userPlantServ.findUserPlantByUserId(id);
+		if (userPlants.size() > 0) {
+			return userPlants;
+		} else {
+			response.setStatus(404);
+			return userPlants;
+		}
+		
 	}
 
 	@GetMapping("userplants/plants/{id}")

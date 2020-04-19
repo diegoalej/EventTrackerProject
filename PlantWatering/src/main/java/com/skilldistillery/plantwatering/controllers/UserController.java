@@ -2,6 +2,8 @@ package com.skilldistillery.plantwatering.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,7 @@ public class UserController {
 	}
 	
 	@PostMapping("users")
-	public User createNewPlant(@RequestBody User user) {
+	public User createNewUser(@RequestBody User user) {
 		return userServ.createUser(user);
 	}
 	
@@ -37,8 +39,15 @@ public class UserController {
 	}
 	
 	@GetMapping("users/{id}")
-	public User findUserWithId(@PathVariable Integer id) {
-		return userServ.findUserById(id);
+	public User findUserWithId(@PathVariable Integer id, HttpServletResponse response) {
+		User user = userServ.findUserById(id);
+		if (user != null) {
+			return user;
+		}
+		else {
+			response.setStatus(404);
+			return user;
+		}
 	}
 
 	@DeleteMapping("users/{id}")
