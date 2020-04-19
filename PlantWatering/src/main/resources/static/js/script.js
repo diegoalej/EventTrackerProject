@@ -37,14 +37,37 @@ function getUserPlantsForUser(userId){
 function displayUserPlants(userPlants) {
 	let dataDiv = document.getElementById('eventDiv');
 	// dataDiv.textContent = '';
-	let ul = document.createElement('ul');
-	dataDiv.appendChild(ul);
 	userPlants.forEach(element => {
+		let ul = document.createElement('ul');
 		let li = document.createElement('li');
 		li.textContent = element.name;
 		ul.appendChild(li);
-	});
-	dataDiv.appendChild(ul);
+
+		li = document.createElement('li');
+		li.textContent = element.lastWatering;
+		ul.appendChild(li);
+
+		li = document.createElement('li');
+		li.textContent = element.nextWatering;
+		ul.appendChild(li);
+
+		li = document.createElement('li');
+		li.textContent = element.location;
+		ul.appendChild(li);
+
+		let userPlantButton = document.createElement('button');
+		userPlantButton.name = 'updateUserPlantForm';
+		userPlantButton.id = 'userPlantButton';
+		userPlantButton.className = 'btn btn-primary';
+		userPlantButton.textContent = 'Edit UserPlant';
+		userPlantButton.addEventListener('click', function(e){
+			console.log(e);
+			// showUserPlantForm(e.target);
+		});
+		ul.appendChild(userPlantButton);
+
+		dataDiv.appendChild(ul);
+	});	
 }
 
 //Function gets user and their plants... TODO to pass in id
@@ -167,6 +190,13 @@ function showUserForm(user){
 
 	form.appendChild(passwordGroup);
 
+	//HIDDEN ID VALUE TO BUILD JSON OBJECT
+	let hiddenValue = document.createElement('input');
+	hiddenValue.type = 'hidden';
+	hiddenValue.name = 'id';
+	hiddenValue.value = user.id;
+	form.appendChild(hiddenValue);
+
 	//BUTTON FOR SUBMIT
 	let editUserButton = document.createElement('button');
 	editUserButton.name = 'editUserButton';
@@ -174,10 +204,11 @@ function showUserForm(user){
 	editUserButton.className = 'btn btn-primary';
 	editUserButton.textContent = 'Submit Edits';
 	editUserButton.addEventListener('click', function(user){
-		//  will be a submit to update user
+		event.preventDefault();
+		updateUser(document.userForm)
 	});
 	form.appendChild(editUserButton);
-
+	//CONDITIONAL TO TOGGLE DISPLAY
 	if (formDiv.style.display === "none") {
 		formDiv.style.display = "block";
 
@@ -185,6 +216,37 @@ function showUserForm(user){
 		formDiv.style.display = "none";
 	  }
 	formDiv.appendChild(form);			
+}
+
+//Function to create user and display results
+function updateUser(formObj) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'api/users', true);
+	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState === 4 ) {
+	    if ( xhr.status == 200 || xhr.status == 201 ) { // Ok or Created
+	      var data = JSON.parse(xhr.responseText);
+	      console.log(data);
+	    //   displayUser(data);
+	    }
+	    else {
+	      console.log("POST request failed.");
+	      console.error(xhr.status + ': ' + xhr.responseText);
+	    }
+	  }
+	};
+	var userObject = {
+	  id: formObj.id.value,
+	  firstName: formObj.firstName.value,
+	  lastName: formObj.lastName.value,
+	  userName: formObj.userName.value,
+	  password: formObj.password.value,
+	  active: true
+	};
+
+	var userObjectJson = JSON.stringify(userObject); // Convert JS object to JSON string
+	xhr.send(userObjectJson);
 }
 
 //Default method to display when users or items are not found
