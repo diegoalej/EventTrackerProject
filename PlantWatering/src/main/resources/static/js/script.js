@@ -115,7 +115,7 @@ function showUserPlantForm(userPlant){
 
 	form.appendChild(nameGroup);
 
-	//GROUP FOR LAST WATERING
+	//GROUP FOR LOCATION
 	let locationGroup = document.createElement('div');
 	locationGroup.className = 'form-group';
 
@@ -131,12 +131,28 @@ function showUserPlantForm(userPlant){
 
 	form.appendChild(locationGroup);
 
+	//GROUP FOR NEXT WATERING
+	let nextWateringGroup = document.createElement('div');
+	nextWateringGroup.className = 'form-group';
+
+	let nextWateringLabel = document.createElement('label');
+	nextWateringLabel.textContent = 'Next Watering';
+	nextWateringGroup.appendChild(nextWateringLabel);
+
+	let nextWateringInput = document.createElement('input');
+	nextWateringInput.placeholder = userPlant.nextWatering;
+	nextWateringInput.name = 'nextWatering';
+	nextWateringInput.type = 'text';
+	nextWateringGroup.appendChild(nextWateringInput);
+
+	form.appendChild(nextWateringGroup);
+
 	//GROUP FOR  WATERING
 	let wateringGroup = document.createElement('div');
 	wateringGroup.className = 'form-group';
 
 	let wateringLabel = document.createElement('label');
-	wateringLabel.textContent = 'To change watering times view userPlant details';
+	wateringLabel.textContent = 'To change last watering date view past waterings';
 	wateringGroup.appendChild(wateringLabel);
 
 	form.appendChild(wateringGroup);
@@ -154,11 +170,11 @@ function showUserPlantForm(userPlant){
 	hiddenValue2.value = userPlant.lastWatering;
 	form.appendChild(hiddenValue2);
 
-	let hiddenValue3 = document.createElement('input');
-	hiddenValue3.type = 'hidden';
-	hiddenValue3.name = 'nextWatering';
-	hiddenValue3.value = userPlant.nextWatering;
-	form.appendChild(hiddenValue3);
+	// let hiddenValue3 = document.createElement('input');
+	// hiddenValue3.type = 'hidden';
+	// hiddenValue3.name = 'nextWatering';
+	// hiddenValue3.value = userPlant.nextWatering;
+	// form.appendChild(hiddenValue3);
 
 	//BUTTON FOR SUBMIT
 	let editUserPlantButton = document.createElement('button');
