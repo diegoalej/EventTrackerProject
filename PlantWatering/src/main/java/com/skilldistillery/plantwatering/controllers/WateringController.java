@@ -2,6 +2,8 @@ package com.skilldistillery.plantwatering.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +28,14 @@ public class WateringController {
 		}
 		
 		@PostMapping("userplants/waterings")
-		public Watering createNewWatering(@RequestBody Watering watering) {
-			return wateringServ.createWatering(watering);
+		public Watering createNewWatering(@RequestBody Watering watering, HttpServletResponse response) {
+			Watering newWatering = wateringServ.createWatering(watering);
+			if (newWatering != null) {
+				return wateringServ.createWatering(watering);
+			}
+			else {
+				response.setStatus(404);
+				return newWatering;
+			}
 		}
 }
