@@ -55,6 +55,8 @@ function displayUserPlants(userPlants) {
 		li.textContent = element.location;
 		ul.appendChild(li);
 
+		dataDiv.appendChild(ul);
+
 		let userPlantButton = document.createElement('button');
 		userPlantButton.name = 'updateUserPlantForm';
 		userPlantButton.id = 'userPlantButton';
@@ -68,8 +70,26 @@ function displayUserPlants(userPlants) {
 			ul.appendChild(userPlantFormDiv);
 			showUserPlantForm(element);
 		});
-		dataDiv.appendChild(ul);
+		
+
+		//BUTTON FOR SHOW WATERINGS FOR USERPLANT
+		let showWateringsButton = document.createElement('button');
+		showWateringsButton.name = 'showWateringsButton';
+		showWateringsButton.id = 'showWateringsButton';
+		showWateringsButton.className = 'btn btn-primary';
+		showWateringsButton.textContent = 'View Waterings';
+		ul.appendChild(showWateringsButton);
+		showWateringsButton.addEventListener('click', function(){
+			let showWateringsDiv = document.createElement('div');
+			showWateringsDiv.id = 'showWateringsDiv'+element.id;
+			showWateringsDiv.style.display = 'none';
+			ul.appendChild(showWateringsDiv);
+			showWaterings(element)
+		});
+	//END OF FOREACH   	
 	});	
+
+	
 }
 
 function showUserPlantForm(userPlant){
@@ -140,24 +160,6 @@ function showUserPlantForm(userPlant){
 	hiddenValue3.value = userPlant.nextWatering;
 	form.appendChild(hiddenValue3);
 
-	// let hiddenValue4 = document.createElement('input');
-	// hiddenValue4.type = 'hidden';
-	// hiddenValue4.name = 'user';
-	// hiddenValue4.value = userPlant.user;
-	// form.appendChild(hiddenValue4);
-
-	// let hiddenValue5 = document.createElement('input');
-	// hiddenValue5.type = 'hidden';
-	// hiddenValue5.name = 'plant';
-	// hiddenValue5.value = userPlant.plant;
-	// form.appendChild(hiddenValue5);
-
-	// let hiddenValue6 = document.createElement('input');
-	// hiddenValue6.type = 'hidden';
-	// hiddenValue6.name = 'waterings';
-	// hiddenValue6.value = userPlant.waterings;
-	// form.appendChild(hiddenValue6);
-
 	//BUTTON FOR SUBMIT
 	let editUserPlantButton = document.createElement('button');
 	editUserPlantButton.name = 'editUserPlantButton';
@@ -169,6 +171,7 @@ function showUserPlantForm(userPlant){
 		updateUserPlant(document.userPlantForm, userPlant)
 	});
 	form.appendChild(editUserPlantButton);
+
 	//CONDITIONAL TO TOGGLE DISPLAY
 	if (formDiv.style.display === "none") {
 		formDiv.style.display = "block";
@@ -177,6 +180,42 @@ function showUserPlantForm(userPlant){
 		formDiv.style.display = "none";
 	  }
 	formDiv.appendChild(form);			
+}
+
+// Function to show waterings
+function showWaterings(userPlant){
+	console.log(userPlant);
+	let div = document.getElementById('showWateringsDiv'+userPlant.id);
+	div.textContent = '';
+
+	let wateringList = document.createElement('ul');
+
+	if (userPlant.waterings.length > 0) {
+		userPlant.waterings.forEach(element => {
+			let li = document.createElement('li');
+			li.textContent = element.wateringDate;
+			wateringList.appendChild(li)
+
+			let wli = document.createElement('li');
+			wli.textContent = element.wateringComment;
+			wateringList.appendChild(wli)
+		});
+	} else {
+		let defaultli = document.createElement('li');
+		defaultli.textContent = 'No Waterings found';
+		wateringList.appendChild(defaultli);
+	}
+
+	
+	
+		//CONDITIONAL TO TOGGLE DISPLAY
+		if (div.style.display === "none") {
+			div.style.display = "block";
+	
+		  } else {
+			div.style.display = "none";
+		  }
+		  div.appendChild(wateringList);
 }
 
 //Function to update userPlant and display results
