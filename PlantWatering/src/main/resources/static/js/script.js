@@ -128,6 +128,36 @@ function showUserPlantForm(userPlant){
 	hiddenValue.value = userPlant.id;
 	form.appendChild(hiddenValue);
 
+	let hiddenValue2 = document.createElement('input');
+	hiddenValue2.type = 'hidden';
+	hiddenValue2.name = 'lastWatering';
+	hiddenValue2.value = userPlant.lastWatering;
+	form.appendChild(hiddenValue2);
+
+	let hiddenValue3 = document.createElement('input');
+	hiddenValue3.type = 'hidden';
+	hiddenValue3.name = 'nextWatering';
+	hiddenValue3.value = userPlant.nextWatering;
+	form.appendChild(hiddenValue3);
+
+	// let hiddenValue4 = document.createElement('input');
+	// hiddenValue4.type = 'hidden';
+	// hiddenValue4.name = 'user';
+	// hiddenValue4.value = userPlant.user;
+	// form.appendChild(hiddenValue4);
+
+	// let hiddenValue5 = document.createElement('input');
+	// hiddenValue5.type = 'hidden';
+	// hiddenValue5.name = 'plant';
+	// hiddenValue5.value = userPlant.plant;
+	// form.appendChild(hiddenValue5);
+
+	// let hiddenValue6 = document.createElement('input');
+	// hiddenValue6.type = 'hidden';
+	// hiddenValue6.name = 'waterings';
+	// hiddenValue6.value = userPlant.waterings;
+	// form.appendChild(hiddenValue6);
+
 	//BUTTON FOR SUBMIT
 	let editUserPlantButton = document.createElement('button');
 	editUserPlantButton.name = 'editUserPlantButton';
@@ -136,7 +166,7 @@ function showUserPlantForm(userPlant){
 	editUserPlantButton.textContent = 'Submit Changes';
 	editUserPlantButton.addEventListener('click', function(user){
 		event.preventDefault();
-		// updateUserPlant(document.userPlantForm)
+		updateUserPlant(document.userPlantForm, userPlant)
 	});
 	form.appendChild(editUserPlantButton);
 	//CONDITIONAL TO TOGGLE DISPLAY
@@ -148,6 +178,43 @@ function showUserPlantForm(userPlant){
 	  }
 	formDiv.appendChild(form);			
 }
+
+//Function to update userPlant and display results
+function updateUserPlant(formObj, userPlant) {
+	console.log(formObj.waterings);
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'api/userplants', true);
+	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState === 4 ) {
+	    if ( xhr.status == 200 || xhr.status == 201 ) { // Ok or Created
+	      var data = JSON.parse(xhr.responseText);
+	      console.log(data);
+	    //   displayUser(data);
+	    }
+	    else {
+	      console.log("POST request failed.");
+	      console.error(xhr.status + ': ' + xhr.responseText);
+	    }
+	  }
+	};
+	var userObject = {
+	  id: formObj.id.value,
+	  plant: userPlant.plant,
+	  user: userPlant.user,
+	  name: formObj.name.value,
+	  lastWatering: formObj.lastWatering.value,
+	  nextWatering: formObj.nextWatering.value,
+	  location: formObj.location.value,
+	  active: true,
+	  waterings: userPlant.waterings
+	};
+	console.log(userObject);
+
+	var userObjectJson = JSON.stringify(userObject); // Convert JS object to JSON string
+	xhr.send(userObjectJson);
+}
+
 
 //Function gets user and their plants... TODO to pass in id
 function getUser(){
@@ -298,7 +365,7 @@ function showUserForm(user){
 	formDiv.appendChild(form);			
 }
 
-//Function to create user and display results
+//Function to update user and display results
 function updateUser(formObj) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'api/users', true);
