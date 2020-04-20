@@ -549,10 +549,10 @@ function displayUser(user) {
 	dataDiv.appendChild(newUserPlantFormButton);
 	newUserPlantFormButton.addEventListener('click', function(){
 		let newUserPlantFormDiv = document.createElement('div');
-		newUserPlantFormDiv.id = 'newUserPlantFormDiv'+element.id;
+		newUserPlantFormDiv.id = 'newUserPlantFormDiv'+user.id;
 		newUserPlantFormDiv.style.display = 'none';
-		ul.appendChild(newUserPlantFormDiv);
-		showNewUserPlantForm(element);
+		dataDiv.appendChild(newUserPlantFormDiv);
+		showNewUserPlantForm(user);
 	});
 
 }
