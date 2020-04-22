@@ -200,7 +200,8 @@ function showUserPlantForm(userPlant){
 	editUserPlantButton.textContent = 'Submit Changes';
 	editUserPlantButton.addEventListener('click', function(user){
 		event.preventDefault();
-		updateUserPlant(document.userPlantForm, userPlant)
+		updateUserPlant(document.userPlantForm, userPlant);
+		displayUserPlants(getUserPlantsForUser(userPlant.user.id));
 	});
 	form.appendChild(editUserPlantButton);
 
@@ -347,6 +348,7 @@ function showWateringForm(watering){
 	wateringDiv.textContent = '';
 
 	let form = document.createElement('form');
+	form.noValidate = true;
 	form.name = 'wateringForm';
 
 	//GROUP FOR  WATERING DATE
@@ -527,7 +529,7 @@ function displayUser(user) {
 
 	let userButton = document.createElement('button');
 	userButton.name = 'updateUserForm';
-	userButton.id = 'userButton';
+	userButton.id = 'userButton'
 	userButton.className = 'btn btn-primary';
 	userButton.textContent = 'Edit User';
 	userButton.addEventListener('click', function(){

@@ -4,9 +4,9 @@
 
 ### Overview
 
-The plantwatering app was made for individuals to keep track of plant waterings in their home or office. The app stores the location, plant, username, and the dates of last watering as well as the date of upcoming watering.
+The WateringApp app was made for individuals to keep track of plant waterings in their home or office. The app stores the location, plant name, and the dates of last watering as well as the date of upcoming watering.
 
-This app contains different entities of plant, userPlant, watering and user. Endpoints are described below, only entity names change.
+This app contains one entity of waterings. Endpoints are described below.
 
 #### Table of REST endpoints
 Return type | Route| Functionality
@@ -20,7 +20,7 @@ Boolean	        |DELETE api/waterings/{id} |Deletes an watering post by id
 
 ### How to use
 
-Users are able to create new events or edit current ones to keep track of their plant waterings.
+Users are able to create new events or edit current waterings to keep track of their plant waterings.
 
 ### Technologies Used
 
