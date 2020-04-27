@@ -1,68 +1,72 @@
-<div class="container" *ngIf='!selected'>
-    <table class="table table-striped table-hover">
-        <thead class="thead thead-dark">
-            <tr>
-                <th>id</th>
-                <th>Plant</th>
-                <th>Location</th>
-                <th>Last Watering</th>
-                <th>Next Watering</th>
-                <th>Description</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let watering of waterings">
-                <td>{{watering.id}}</td>
-                <td>{{watering.plantName}}&nbsp;&nbsp; <button (click)="displayWatering(watering)"
-                        class="btn btn-primary">Details</button></td>
-                <td>{{watering.location}}</td>
-                <!-- <td><input type="checkbox" class="form-check" name="completed"></td> -->
-                <td>{{watering.lastWateringdate}}</td>
-                <td>{{watering.nextWateringdate}}</td>
-                <td>{{watering.description}}</td>
-                <td><button (click)=destroy(watering.id)>X</button></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
 <div class="container">
-    <form *ngIf='!selected'>
-        <input type="text" name="plantName" [(ngModel)]="newWatering.plantName" placeholder="Plant Name" /><br />
-        <input type="text" name="location" [(ngModel)]="newWatering.location" placeholder="Location" /><br />
-        <input type="date" name="lastWateringdate" [(ngModel)]="newWatering.lastWateringdate"
-            placeholder="Watering Date" /><br />
-        <input type="date" name="nextWateringdate" [(ngModel)]="newWatering.nextWateringdate"
-            placeholder="Next Watering Date" /><br />
-        <input type="text" name="description" [(ngModel)]="newWatering.description"
-            placeholder="Additional Details" /><br />
-        <button (click)="addWatering(newWatering)">Add item</button>
-    </form>
+    <h2 class="jumbotron-heading text-center pt-2">WateringApp</h2>
+    <p class="lead text-center">The Watering app is here to help you keep track of all your plants</p>
 </div>
+    <div class="container" *ngIf='!selected'>
+        <table class="table table-striped table-hover">
+            <thead class="thead thead-dark">
+                <tr>
+                    <th>Plant</th>
+                    <th>Location</th>
+                    <th>Last Watering</th>
+                    <th>Next Watering</th>
+                    <th>Description</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let watering of waterings">
+                    <td>{{watering.plantName}}&nbsp;&nbsp; <button (click)="displayWatering(watering)"
+                            class="btn btn-primary">Details</button></td>
+                    <td>{{watering.location}}</td>
+                    <!-- <td><input type="checkbox" class="form-check" name="completed"></td> -->
+                    <td>{{watering.lastWateringdate}}</td>
+                    <td>{{watering.nextWateringdate}}</td>
+                    <td>{{watering.description}}</td>
+                    <td><button (click)=destroy(watering.id)>X</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <form *ngIf='!selected'>
+            <input type="text" name="plantName" [(ngModel)]="newWatering.plantName" placeholder="Plant Name" /><br />
+            <input type="text" name="location" [(ngModel)]="newWatering.location" placeholder="Location" /><br />
+            <input type="date" name="lastWateringdate" [(ngModel)]="newWatering.lastWateringdate"
+                placeholder="Watering Date" /><br />
+            <input type="date" name="nextWateringdate" [(ngModel)]="newWatering.nextWateringdate"
+                placeholder="Next Watering Date" /><br />
+            <input type="text" name="description" [(ngModel)]="newWatering.description"
+                placeholder="Additional Details" /><br />
+            <button (click)="addWatering(newWatering)">Add item</button>
+        </form>
+    </div>
 
-<div *ngIf='selected' class="container">
-    <p>{{selected.plantName}}</p>
-    <p>{{selected.location}}</p>
-    <p>{{selected.lastWateringdate}}</p>
-    <p>{{selected.nextWateringdate}}</p>
-    <p>{{selected.description}}</p>
-    <button (click)=displayTable()>Display Table</button>
-    <button (click)=setEditWatering()>Edit Watering</button>
-</div>
+    <div *ngIf='selected' class="container">
+        <p>{{selected.plantName}}</p>
+        <p>{{selected.location}}</p>
+        <p>{{selected.lastWateringdate}}</p>
+        <p>{{selected.nextWateringdate}}</p>
+        <p>{{selected.description}}</p>
+        <button (click)=displayTable()>Display Table</button>
+        <button (click)=setEditWatering()>Edit Watering</button>
+    </div>
 
-<div class="container">
-    <form *ngIf='editWatering'>
-        <input type="text" name="plantName" [(ngModel)]="editWatering.plantName" placeholder="Task" /><br />
-        <input type="text" name="location" [(ngModel)]="editWatering.location" placeholder="Completed" /><br />
-        <input type="date" name="lastWateringdate" [(ngModel)]="editWatering.lastWateringdate"
-            placeholder="Watering Date" /><br />
-        <input type="date" name="nextWateringdate" [(ngModel)]="editWatering.nextWateringdate"
-            placeholder="Next Watering Date" /><br />
-        <input type="text" name="description" [(ngModel)]="editWatering.description" placeholder="Description" /><br />
-        <input type="hidden" name="id" [(ngModel)]="editWatering.id" value="editWatering.id"/><br />
-        <input type="hidden" name="userName" [(ngModel)]="editWatering.userName" value="editWatering.userName"/><br />
-        <!-- <input type="submit" value="Add Item" />   -->
-        <button (click)="editWatering = null">Cancel</button>
-        <button (click)="updateWatering(editWatering)">Save</button>
-    </form>
-</div>
+    <div class="container">
+        <form *ngIf='editWatering'>
+            <input type="text" name="plantName" [(ngModel)]="editWatering.plantName" placeholder="Task" /><br />
+            <input type="text" name="location" [(ngModel)]="editWatering.location" placeholder="Completed" /><br />
+            <input type="date" name="lastWateringdate" [(ngModel)]="editWatering.lastWateringdate"
+                placeholder="Watering Date" /><br />
+            <input type="date" name="nextWateringdate" [(ngModel)]="editWatering.nextWateringdate"
+                placeholder="Next Watering Date" /><br />
+            <input type="text" name="description" [(ngModel)]="editWatering.description"
+                placeholder="Description" /><br />
+            <input type="hidden" name="id" [(ngModel)]="editWatering.id" value="editWatering.id" /><br />
+            <input type="hidden" name="userName" [(ngModel)]="editWatering.userName"
+                value="editWatering.userName" /><br />
+            <!-- <input type="submit" value="Add Item" />   -->
+            <button (click)="editWatering = null">Cancel</button>
+            <button (click)="updateWatering(editWatering)">Save</button>
+        </form>
+    </div>

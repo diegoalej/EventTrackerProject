@@ -3,6 +3,7 @@ import { WateringDataService } from './../../services/watering-data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-watering',
   templateUrl: './watering.component.html',
@@ -19,43 +20,42 @@ export class WateringComponent implements OnInit {
   editWatering: Watering = null;
 
   constructor(
-        private wateringDataService: WateringDataService,
-        private currentRoute: ActivatedRoute,
-        private router: Router
+    private wateringDataService: WateringDataService,
+    private currentRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
     if (!this.selected && this.currentRoute.snapshot.paramMap.get('id')) {
       this.wateringDataService.show(this.currentRoute.snapshot.paramMap.get('id')).subscribe(
         yay => {
-              this.selected = yay;
+          this.selected = yay;
         },
         nay => {
-              this.router.navigateByUrl('notFound');
+          this.router.navigateByUrl('notFound');
         }
       )
     }
-    else{
+    else {
       this.reload();
     }
   }
 
-  displayWatering(watering: Watering){
+  displayWatering(watering: Watering) {
     console.log(watering);
     this.router.navigateByUrl(`/waterings/${watering.id}`);
   }
 
-  displayTable(){
+  displayTable() {
     this.selected = null;
     this.router.navigateByUrl(`/waterings`);
   }
 
-  reload(){
+  reload() {
     this.wateringDataService.index().subscribe(
       data => {
         this.waterings = data;
         console.log(this.waterings);
-
       },
       bad => {
         console.error('Error in reload() ' + bad);
@@ -63,20 +63,20 @@ export class WateringComponent implements OnInit {
     );
   }
 
-  addWatering(watering: Watering){
+  addWatering(watering: Watering) {
     watering.userName = 'user';
     this.wateringDataService.create(watering).subscribe(
-        good => {
-          this.reload();
-          this.newWatering = new Watering();
-        },
-        bad => {
-          console.error("addTodo failed"+bad);
-        }
+      good => {
+        this.reload();
+        this.newWatering = new Watering();
+      },
+      bad => {
+        console.error("addTodo failed" + bad);
+      }
     );
   }
 
-  public destroy(id: number){
+  public destroy(id: number) {
     this.wateringDataService.destroy(id).subscribe(
       yay => {
         this.reload();
@@ -88,11 +88,11 @@ export class WateringComponent implements OnInit {
     this.reload();
   }
 
-  setEditWatering(){
+  setEditWatering() {
     this.editWatering = Object.assign({}, this.selected);
   }
 
-  updateWatering(watering: Watering){
+  updateWatering(watering: Watering) {
     // watering.userName = 'user';
     this.wateringDataService.update(watering).subscribe(
       yay => {
@@ -101,7 +101,7 @@ export class WateringComponent implements OnInit {
         this.selected = null;
       },
       nay => {
-        console.error("updateTodo failed"+nay);
+        console.error("updateTodo failed" + nay);
       }
     );
   };
